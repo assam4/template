@@ -37,6 +37,20 @@ void nth_element( RandomAccess start
     }
 }
 
+template <typename RandomAccess>
+void n_smallest_elements(RandomAccess start , size_t n ,RandomAccess end)
+{
+   auto last_element = (start + n) ;
+   
+   for (auto i = last_element ; i < end ; ++i)
+   {
+    for(auto j = start ;j != last_element ; ++ j)
+    if(*j > *i) swap(*j , *i);
+
+    
+   }
+   return ;
+}
 
     
 int main ()
