@@ -11,7 +11,10 @@ void nth_element (  RandomAccess begin
     RandomAccess step = (index == begin) ? ++ begin : begin ;
    if (*step < *index)
             {
-                while (*step < *index && step < end) ++ step ;
+                while ( *step < *index 
+                        || step == index    
+                        && step < end   ) 
+                                        ++ step ;
                 if(step == end)
                 {
                     swap(*index , *(--step));
@@ -22,7 +25,9 @@ void nth_element (  RandomAccess begin
     else if (*step == *index)
             {
                 last_little = step ;
-                while (*step >= *index && step < end) ++ step ;
+                while ( *step >= *index 
+                        && step < end   ) 
+                                        ++ step ;
                 if(step != end) 
                 {
                     swap(*begin , *step) ;
@@ -33,7 +38,10 @@ void nth_element (  RandomAccess begin
             }
    else 
             {
-                while (*step > *index && step < end) ++ step ;
+                while ( *step > *index 
+                        || step == index  
+                        && step < end   ) 
+                                        ++ step ;
                 if(step == end ) 
                 {
                     if(index > begin)
@@ -62,8 +70,8 @@ void nth_element (  RandomAccess begin
 
 int main()
 {
-    vector<int> numbers {8,9,3,4,10,11,2} ;
-    nth_element(numbers.begin(),numbers.begin(),numbers.end());
+    vector<int> numbers {9,8,7,6,5,10,-1} ;
+    nth_element(numbers.begin(),numbers.begin()+3,numbers.end());
 
     for (auto var : numbers)
     cout << var << " " ;
